@@ -1,5 +1,5 @@
 <template>
-    <div class="search" v-show="visible">
+    <div class="search" v-if="visible">
         <search-tab></search-tab>
     </div>
 </template>

@@ -16,6 +16,9 @@
         :show-dots=false
         :initial-index="index"
         ref="slide"
+        :options="slideOptions"
+        @scroll="onScroll"
+        @change="onChange"
       >
         <cube-slide-item>
             <search-all></search-all>
@@ -83,26 +86,25 @@
         SearchAll,
         SearchFinish,
         SearchDoing
-    }
+    },
     // mounted() {
     //   this.onChange(this.index)
     // },
-    // methods: {
-    //   onScroll(pos) {
-    //     const tabBarWidth = this.$refs.tabBar.$el.clientWidth
-    //     const slideWidth = this.$refs.slide.slide.scrollerWidth
-    //     const transform = -pos.x / slideWidth * tabBarWidth
-    //     this.$refs.tabBar.setSliderTransform(transform)
-    //   },
-    //   onChange(current) {
-    //     this.index = current
-    //     console.log(this.index)
-    //     const instance = this.$refs.component[current]
-    //     if (instance && instance.fetch) {
-    //       instance.fetch()
-    //     }
-    //   }
-    // }
+    methods: {
+      onScroll(pos) {
+        const tabBarWidth = this.$refs.tabBar.$el.clientWidth
+        const slideWidth = this.$refs.slide.slide.scrollerWidth
+        const transform = -pos.x / slideWidth * tabBarWidth
+        this.$refs.tabBar.setSliderTransform(transform)
+      },
+      onChange(current) {
+        this.index = current
+        const instance = this.$refs.component[current]
+        if (instance && instance.fetch) {
+          instance.fetch()
+        }
+      }
+    }
   }
 </script>
 
